@@ -25,11 +25,11 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo):
 
 
 pole_cisel = []
-for i in range(-6, 19, 3):
+for i in range(-999, 1000, 3):
     pole_cisel.append(i)
 print(pole_cisel)
-
-for j in range(-7, 20):
+k=[-1000,-999,-996,-995,-4,-3,-2,-1,0,1,2,3,555,996,997,998,999,1000,1001]
+for j in enumerate(k):
     print("-----------------------------------------")
-    print(j)
-    binary_search_rec(pole_cisel, j, 0, len(pole_cisel) - 1)
+    l,m=j
+    binary_search_rec(pole_cisel, m, 0, len(pole_cisel) - 1)
