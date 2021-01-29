@@ -9,11 +9,11 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo):
         print("Prvek nalezen!")
         print("Index prvku: ", median)
         print("Hodnota prvku: ", lst[median])
-        return median, lst[median]
+        return True, median
 
     elif (vlevo == vpravo):
         print(key, " není v seznamu!")
-        return False
+        return False, -1
     else:
 
         if key < lst[median]:
