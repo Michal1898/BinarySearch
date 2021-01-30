@@ -18,29 +18,34 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo, recursion_level :int):
         raise CustomException("Vlevo a Vpravo musí  být nezáporné číslo!")
     elif vpravo<vlevo:
         raise CustomException("prohozené vlevo a vpravo")
-
+    search_succesfull=False
     median = int(((vlevo + vpravo)) / 2)
     print("Hledaná hodnota:", key)
     print("Levý index: ", vlevo, "Index Mediánu:", median, "Pravý index:", vpravo)
     print("Hodnota mediánu:", lst[median], "\n")
 
     if (key == lst[median]):
-
+        search_succesfull = True
         print("Prvek nalezen!")
         print("Index prvku: ", median)
         print("Hodnota prvku: ", lst[median])
-        return True
 
     elif (vlevo == vpravo):
+        search_succesfull=False
         print(key, " není v seznamu!")
-        return False
+
     else:
 
         if key < lst[median]:
-            binary_search_rec(lst, key, vlevo, median,recursion_level)
+            search_succesfull,actual_index= binary_search_rec(lst, key, vlevo, median,recursion_level)
 
         elif key > lst[median]:
-            binary_search_rec(lst, key, median+1, vpravo,recursion_level)
+            search_succesfull,actual_index=binary_search_rec(lst, key, median+1, vpravo,recursion_level)
+
+    if search_succesfull:
+        return search_succesfull, median
+    else:
+        return search_succesfull, -1
 
 
 
@@ -54,7 +59,11 @@ for j in enumerate(k):
     print("-----------------------------------------")
     l,m=j
     start = timeit.timeit()
-    n=binary_search_rec(pole_cisel, m, 0, len(pole_cisel) - 1,0)
+    element_found,final_index=binary_search_rec(pole_cisel, m, 0, len(pole_cisel) - 1,0)
     end = timeit.timeit()
     print("Doba trvani hledaní: ",end-start)
-    print(n)
+    if element_found:
+        print("Číslo ",m ," je na prvek s indexem:", final_index)
+    else:
+        print("Číslo ",m ," není v poli čísel!", final_index)
+
