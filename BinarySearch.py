@@ -26,26 +26,28 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo, recursion_level :int):
 
     if (key == lst[median]):
         search_succesfull = True
+        target_index=median
         print("Prvek nalezen!")
         print("Index prvku: ", median)
         print("Hodnota prvku: ", lst[median])
+
+        return search_succesfull,target_index
 
     elif (vlevo == vpravo):
         search_succesfull=False
         print(key, " není v seznamu!")
 
+        return search_succesfull, -1
+
     else:
 
         if key < lst[median]:
-            search_succesfull,actual_index= binary_search_rec(lst, key, vlevo, median,recursion_level)
+            search_succesfull2,target_index2= binary_search_rec(lst, key, vlevo, median,recursion_level)
 
         elif key > lst[median]:
-            search_succesfull,actual_index=binary_search_rec(lst, key, median+1, vpravo,recursion_level)
+            search_succesfull2,target_index2=search_succesfull,actual_index=binary_search_rec(lst, key, median+1, vpravo,recursion_level)
 
-    if search_succesfull:
-        return search_succesfull, median
-    else:
-        return search_succesfull, -1
+    return search_succesfull2,target_index2
 
 
 
