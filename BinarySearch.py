@@ -5,23 +5,23 @@ class CustomException(Exception):
         message = a
         super().__init__(message)
 
-def binary_search_rec(lst: list, key: int, vlevo, vpravo, recursion_level :int):
+def binary_search_rec(lst: list, key: int, left_indent, right_indent, recursion_level :int):
     if recursion_level < 0 or not (isinstance(recursion_level, int)):
         raise CustomException("Úroveň rekurze musí být nezáporné, celé číslo!")
 
     recursion_level+=1
     print("Úroveň rekurze: ", recursion_level)
 
-    if not isinstance(vlevo, int) or not isinstance(vpravo, int):
+    if not isinstance(left_indent, int) or not isinstance(right_indent, int):
         raise CustomException("Vlevo a Vpravo musí  být celé číslo!")
-    elif vlevo<0 or vpravo<0:
+    elif left_indent<0 or right_indent<0:
         raise CustomException("Vlevo a Vpravo musí  být nezáporné číslo!")
-    elif vpravo<vlevo:
+    elif right_indent<left_indent:
         raise CustomException("prohozené vlevo a vpravo")
     search_succesfull=False
-    median = int(((vlevo + vpravo)) / 2)
+    median = int(((left_indent + right_indent)) / 2)
     print("Hledaná hodnota:", key)
-    print("Levý index: ", vlevo, "Index Mediánu:", median, "Pravý index:", vpravo)
+    print("Levý index: ", left_indent, "Index Mediánu:", median, "Pravý index:", right_indent)
     print("Hodnota mediánu:", lst[median], "\n")
 
     if (key == lst[median]):
@@ -33,7 +33,7 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo, recursion_level :int):
 
         return search_succesfull,target_index
 
-    elif (vlevo == vpravo):
+    elif (left_indent == right_indent):
         search_succesfull=False
         print(key, " není v seznamu!")
 
@@ -42,10 +42,10 @@ def binary_search_rec(lst: list, key: int, vlevo, vpravo, recursion_level :int):
     else:
 
         if key < lst[median]:
-            search_succesfull2,target_index2= binary_search_rec(lst, key, vlevo, median,recursion_level)
+            search_succesfull2,target_index2= binary_search_rec(lst, key, left_indent, median,recursion_level)
 
         elif key > lst[median]:
-            search_succesfull2,target_index2=search_succesfull,actual_index=binary_search_rec(lst, key, median+1, vpravo,recursion_level)
+            search_succesfull2,target_index2=search_succesfull,actual_index=binary_search_rec(lst, key, median+1, right_indent,recursion_level)
 
     return search_succesfull2,target_index2
 
